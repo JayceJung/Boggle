@@ -1,12 +1,9 @@
-import React from 'react';
-import mainPage from './components/MainPage/mainPage';
-import React from 'react';
-import main from './components/MainPage/mainPage';
+import MainPage from './components/MainPage/index';
 
 function App() {
   return (
    <div>
-     
+     <MainPage />
    </div>
   );
 }
