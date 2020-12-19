@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function mainPage() {
+export default function MainPage() {
   return (
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies
@@ -15,4 +15,3 @@ export default function mainPage() {
     </p>
   );
 }
-
