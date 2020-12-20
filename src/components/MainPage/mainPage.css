@@ -6,11 +6,20 @@
 
 #title {
     margin: 10px; 
-    font-size: 110px;
+    font-size: 100px;
     font-style: normal;
     font-weight: 400;
-    line-height: 163px;
+    line-height: 120px;
     letter-spacing: 0em;
     text-align: center;
 }
 
+#help {
+    width: 260px;
+    margin: 40px 0; 
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0em;
+    text-align: center;
+}
