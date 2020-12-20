@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import Board from "../Board/board";
+import { Grid, Row, Col } from "react-flexbox-grid";
+import './mainPage.css';
+
+const boggle = require("pf-boggle");
 
 export default function MainPage() {
+  const boggleArray = boggle.generate(4, boggle.diceSets["classic4"]);
+
+  useEffect(() => {
+    const boggleAnswer = boggle.solve(boggleArray);
+    console.log("boggle Array:", boggleArray);
+    console.log("boggle Answers: ", boggleAnswer);
+  });
+
   return (
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies
-      sagittis ultrices. Nam eu arcu commodo, vehicula ex ut, convallis mi.
-      Quisque arcu metus, semper vel hendrerit vel, facilisis a metus. Morbi
-      elementum ante eu elit molestie lacinia. Curabitur tempus metus id urna
-      sagittis, ac consequat risus molestie. Donec nec ullamcorper enim. Cras
-      sed sem risus. Quisque pellentesque neque sapien, eu faucibus neque
-      porttitor eu. Vivamus semper purus eu tristique accumsan. Mauris ac lorem
-      at nibh mattis dictum. Cras scelerisque sagittis tortor non molestie.
-      Mauris et mauris eget urna posuere suscipit.
-    </p>
+    <div id="mainWrap">
+      <Row id="title" center="lg">
+        Boggle
+      </Row>
+      <Row id="gameWrap">
+        <Col xs={8}>
+          <Board array={boggleArray} />
+        </Col>
+        <Col xs={4}>chat</Col>
+      </Row>
+    </div>
   );
 }
