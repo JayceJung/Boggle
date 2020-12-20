@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+#tableWrap {
+    margin: 0 50px;
+    width: 80%;
+}
+
 .table {
     border: solid black 1px;
-    padding: 0.5em 1em;
+    padding: 0.3em;
     font-weight: 600;
-    font-size: 50px;
+    font-size: 70px;
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nanum Pen Script', sans-serif;
+    width: 25%;
 }

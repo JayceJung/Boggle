@@ -17,7 +17,7 @@ export default function MainPage() {
   return (
     <div id="mainWrap">
       <Row id="title" center="lg">
-        Boggle
+        BOGGLE
       </Row>
       <Row id="gameWrap">
         <Col xs={8}>

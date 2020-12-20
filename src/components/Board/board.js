@@ -5,7 +5,7 @@ import './board.css';
 export default function Board(props) {
 
   return (
-    <Table responsive>
+    <Table responsive id="tableWrap">
       <tbody>
         <tr>
           <td className="table">{props.array[0]}</td>

@@ -1,3 +1,16 @@
-#title {
-    margin: 30px;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+#mainWrap {
+    font-family: 'Nanum Pen Script';
 }
+
+#title {
+    margin: 10px; 
+    font-size: 110px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 163px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
