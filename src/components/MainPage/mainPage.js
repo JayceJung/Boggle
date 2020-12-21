@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Board from '../Board/board';
+import RuleModal from '../RuleModal/ruleModal';
 import WordList from '../WordList/wordList';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import './mainPage.css';
