@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+.wordListSection {
+    border: black solid 3px;
+    box-sizing: border-box;
+    padding: 0.3em;
+    padding-bottom: 4px;
+    margin-right: 100px;
+    overflow: hidden;
+    font-size: 2rem;
+}
+
+.list {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.inputDiv {
+    height: 50px;
+    width: 90%;
+    margin: auto;
+}
+
+.inputField {
+    min-width: 100%;
+    font-size: 1.75rem;
+    font-family: 'Nanum Pen Script';
+}
