@@ -1,40 +1,56 @@
-const dfs = (lettersArray, i, j, count, word) => {
+const dfs = (boardLettersArray, i, j, count, word) => {
     if (count === word.length) {
         return true;
     }
 
     if (
         i < 0 ||
-        i >= lettersArray.length ||
+        i >= boardLettersArray.length ||
         j < 0 ||
-        j >= lettersArray[i] ||
-        lettersArray[i][j] != word[count]
+        j >= boardLettersArray[i] ||
+        boardLettersArray[i][j] != word[count]
     ) {
         return false;
     }
 
-    const savedTemp = lettersArray[i][j];
-    lettersArray[i][j] = ' ';
+    const savedTemp = boardLettersArray[i][j];
+    boardLettersArray[i][j] = ' ';
     const found =
-        dfs(lettersArray, i - 1, j, count + 1, word) ||
-        dfs(lettersArray, i + 1, j, count + 1, word) ||
-        dfs(lettersArray, i, j - 1, count + 1, word) ||
-        dfs(lettersArray, i, j + 1, count + 1, word) ||
-        dfs(lettersArray, i - 1, j + 1, count + 1, word) ||
-        dfs(lettersArray, i - 1, j - 1, count + 1, word) ||
-        dfs(lettersArray, i + 1, j + 1, count + 1, word) ||
-        dfs(lettersArray, i + 1, j - 1, count + 1, word);
-    lettersArray[i][j] = savedTemp;
+        dfs(boardLettersArray, i - 1, j, count + 1, word) ||
+        dfs(boardLettersArray, i + 1, j, count + 1, word) ||
+        dfs(boardLettersArray, i, j - 1, count + 1, word) ||
+        dfs(boardLettersArray, i, j + 1, count + 1, word) ||
+        dfs(boardLettersArray, i - 1, j + 1, count + 1, word) ||
+        dfs(boardLettersArray, i - 1, j - 1, count + 1, word) ||
+        dfs(boardLettersArray, i + 1, j + 1, count + 1, word) ||
+        dfs(boardLettersArray, i + 1, j - 1, count + 1, word);
+    boardLettersArray[i][j] = savedTemp;
     return found;
 };
 
-const wordSearch = (word, letters) => {
-    const lettersArray = [...letters];
+const wordSearch = (word, boardLetters) => {
+    const charsArray = word.split('');
+
+    while (charsArray.includes('Q')) {
+        const qIndex = charsArray.indexOf('Q');
+        if (qIndex > -1 && charsArray[qIndex + 1] === 'U') {
+            charsArray[qIndex] = 'QU';
+            charsArray.splice(qIndex + 1, 1);
+        } else {
+            break;
+        }
+    }
+    console.log(charsArray);
+    const boardLettersArray = [...boardLetters];
     const newArray = [];
-    while (lettersArray.length > 0) newArray.push(lettersArray.splice(0, 4));
+    while (boardLettersArray.length > 0)
+        newArray.push(boardLettersArray.splice(0, 4));
     for (let i = 0; i < newArray.length; i++) {
         for (let j = 0; j < newArray[i].length; j++) {
-            if (newArray[i][j] === word[0] && dfs(newArray, i, j, 0, word)) {
+            if (
+                newArray[i][j] === charsArray[0] &&
+                dfs(newArray, i, j, 0, charsArray)
+            ) {
                 return true;
             }
         }
