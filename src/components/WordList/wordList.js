@@ -7,7 +7,7 @@ export default function WordList(props) {
     const letters = props.array;
     const [inputValue, setInputValue] = useState('');
     const [wordsArray, setWordsArray] = useState([]);
-    const [placeHolder, setPlaceHolder] = useState('Enter words here!');
+    const [placeHolder, setPlaceHolder] = useState('Enter words!');
 
     const scrollToBottom = () => {
         const listDiv = document.getElementById('list');
@@ -20,10 +20,10 @@ export default function WordList(props) {
 
         if (inputValue.length <= 2) {
             setInputValue('');
-            setPlaceHolder('That word is too short!');
+            setPlaceHolder('Word is too short!');
         } else if (!wordMakeable) {
             setInputValue('');
-            setPlaceHolder("That word can't be made!");
+            setPlaceHolder("Word can't be made!");
         } else if (
             inputValue != '' &&
             !wordsArray.includes(inputValue) &&
@@ -35,7 +35,7 @@ export default function WordList(props) {
             scrollToBottom();
         } else if (wordsArray.includes(inputValue)) {
             setInputValue('');
-            setPlaceHolder('This word is already in your list!');
+            setPlaceHolder('Word already in list!');
         }
     };
 
