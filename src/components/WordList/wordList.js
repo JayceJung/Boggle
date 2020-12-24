@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import WordListItem from '../WordListItem/wordListItem';
 import './wordList.css';
+import wordSearch from './wordSearch';
 
 export default function WordList(props) {
-    /* const answers = props.answers; -- need to assign asnwers to the solved answers that are incoming */
+    const letters = props.array;
     const [inputValue, setInputValue] = useState('');
     const [wordsArray, setWordsArray] = useState([]);
     const [placeHolder, setPlaceHolder] = useState('Enter words here!');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (
+        const wordMakeable = wordSearch(inputValue, letters);
+        if (!wordMakeable) {
+            setInputValue('');
+            setPlaceHolder("That word can't be made!");
+        } else if (
             inputValue != '' &&
-            !wordsArray.includes(
-                inputValue
-            ) /* && answers.includes(inputValue) for error handling once asnwers are coming in through props*/
+            !wordsArray.includes(inputValue) &&
+            wordMakeable
         ) {
             setWordsArray([...wordsArray, inputValue]);
             setInputValue('');
@@ -46,6 +50,7 @@ export default function WordList(props) {
                         onSubmit={(event) => handleSubmit(event)}
                         placeholder={placeHolder}
                     />
+                    {console.log(!wordsArray.includes('A'))}
                 </form>
             </div>
         </div>

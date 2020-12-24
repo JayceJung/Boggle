@@ -24,7 +24,7 @@ export default function MainPage() {
                     <Board array={boggleArray} />
                 </Col>
                 <Col xs={4}>
-                    <WordList /*answers={need to get boggleAnswer as a prop for wordlist}*//>
+                    <WordList array={boggleArray} />
                 </Col>
             </Row>
         </div>
