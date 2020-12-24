@@ -9,10 +9,19 @@ export default function WordList(props) {
     const [wordsArray, setWordsArray] = useState([]);
     const [placeHolder, setPlaceHolder] = useState('Enter words here!');
 
+    const scrollToBottom = () => {
+        const listDiv = document.getElementById('list');
+        listDiv.scrollTop = listDiv.scrollHeight;
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const wordMakeable = wordSearch(inputValue, letters);
-        if (!wordMakeable) {
+
+        if (inputValue.length <= 2) {
+            setInputValue('');
+            setPlaceHolder('That word is too short!');
+        } else if (!wordMakeable) {
             setInputValue('');
             setPlaceHolder("That word can't be made!");
         } else if (
@@ -23,6 +32,7 @@ export default function WordList(props) {
             setWordsArray([...wordsArray, inputValue]);
             setInputValue('');
             setPlaceHolder('');
+            scrollToBottom();
         } else if (wordsArray.includes(inputValue)) {
             setInputValue('');
             setPlaceHolder('This word is already in your list!');
@@ -37,7 +47,7 @@ export default function WordList(props) {
 
     return (
         <div className="wordListSection">
-            <div className="list">
+            <div className="list" id="list">
                 <WordListItem words={wordsArray} />
             </div>
             <div className="inputDiv">
@@ -50,7 +60,6 @@ export default function WordList(props) {
                         onSubmit={(event) => handleSubmit(event)}
                         placeholder={placeHolder}
                     />
-                    {console.log(!wordsArray.includes('A'))}
                 </form>
             </div>
         </div>
