@@ -10,10 +10,10 @@ const boggle = require('pf-boggle');
 export default function MainPage() {
     const boggleArray = boggle.generate(4, boggle.diceSets['classic4']);
     const allAnswer = boggle.solve(boggleArray);
-    const boggleAnswer = allAnswer.filter(words => words.word.length > 2);
+    const boggleAnswer = allAnswer.filter((words) => words.word.length > 2);
 
     useEffect(() => {
-        console.log("actualAnswer: ", boggleAnswer)
+        console.log('actualAnswer: ', boggleAnswer);
     });
 
     return (
@@ -26,7 +26,7 @@ export default function MainPage() {
                     <Board array={boggleArray} />
                 </Col>
                 <Col xs={4}>
-                    <WordList /*answer={boggleAnswer}*//>
+                    <WordList array={boggleArray} />
                 </Col>
             </Row>
         </div>
