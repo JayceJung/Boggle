@@ -40,11 +40,14 @@ const wordSearch = (word, boardLetters) => {
             break;
         }
     }
-    console.log(charsArray);
+
     const boardLettersArray = [...boardLetters];
     const newArray = [];
-    while (boardLettersArray.length > 0)
+
+    while (boardLettersArray.length > 0) {
         newArray.push(boardLettersArray.splice(0, 4));
+    }
+
     for (let i = 0; i < newArray.length; i++) {
         for (let j = 0; j < newArray[i].length; j++) {
             if (
