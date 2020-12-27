@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import './board.css';
 
 export default function Board(props) {
-
+    console.log('Board Array: ', props.array);
   return (
     <Table responsive id={(props.gameStatus=='init' || props.gameStatus=='done') ? "blurredTable" : "tableWrap"}>
       <tbody>

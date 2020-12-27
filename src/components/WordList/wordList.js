@@ -1,27 +1,41 @@
 import React, { useState } from 'react';
 import WordListItem from '../WordListItem/wordListItem';
 import './wordList.css';
+import wordSearch from './wordSearch';
 
 export default function WordList(props) {
-    /* const answers = props.answers; -- need to assign asnwers to the solved answers that are incoming */
+    const letters = props.array;
     const [inputValue, setInputValue] = useState('');
     const [wordsArray, setWordsArray] = useState([]);
-    const [placeHolder, setPlaceHolder] = useState('Enter words here!');
+    const [placeHolder, setPlaceHolder] = useState('Enter words!');
+
+    const scrollToBottom = () => {
+        const listDiv = document.getElementById('list');
+        listDiv.scrollTop = listDiv.scrollHeight;
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (
+        const wordMakeable = wordSearch(inputValue, letters);
+
+        if (inputValue.length <= 2) {
+            setInputValue('');
+            setPlaceHolder('Word is too short!');
+        } else if (!wordMakeable) {
+            setInputValue('');
+            setPlaceHolder("Word can't be made!");
+        } else if (
             inputValue != '' &&
-            !wordsArray.includes(
-                inputValue
-            ) /* && answers.includes(inputValue) for error handling once asnwers are coming in through props*/
+            !wordsArray.includes(inputValue) &&
+            wordMakeable
         ) {
             setWordsArray([...wordsArray, inputValue]);
             setInputValue('');
             setPlaceHolder('');
+            scrollToBottom();
         } else if (wordsArray.includes(inputValue)) {
             setInputValue('');
-            setPlaceHolder('This word is already in your list!');
+            setPlaceHolder('Word already in list!');
         }
     };
 
@@ -30,10 +44,11 @@ export default function WordList(props) {
             setInputValue(value.toUpperCase());
         }
     };
+    console.log('WordList Array: ', props.array);
 
     return (
         <div className="wordListSection">
-            <div className="list">
+            <div className="list" id="list">
                 <WordListItem words={wordsArray} />
             </div>
             <div className="inputDiv">

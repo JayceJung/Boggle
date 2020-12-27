@@ -4,8 +4,8 @@ import CountdownTimer from "react-component-countdown-timer";
 export default function TimerButton(props) {
 
     const [animationStart, setAnimationStart] = useState(false);
-    const [buttonText, setButtonText] = useState("3");
-    let initialNumber = 3;
+    const [buttonText, setButtonText] = useState("4");
+    let initialNumber = 4;
 
     const updateButtonText = () => {
         if ( buttonText == "1") {
@@ -34,7 +34,7 @@ export default function TimerButton(props) {
         )
     } else if (!animationStart && props.gameStatus=='init') {
         return (
-            <button id="timerButton" disabled=true onClick={() => {
+            <button id="timerButton" onClick={() => {
                 setAnimationStart(true);
             }}>
                 Start Game!
