@@ -11,13 +11,15 @@ const boggle = require('pf-boggle');
 export default function MainPage() {
     const boggleArray = boggle.generate(4, boggle.diceSets['classic4']);
 
-    const stopGame = () => {
-        console.log("Game should stop")
-    }
+    const [gameStatus, setGameStatus] = useState("init");
 
-    useEffect(() => {
-        const boggleAnswer = boggle.solve(boggleArray);
-    });
+    const startGame = () => {
+        setGameStatus('started');
+    };
+
+    const stopGame = () => {
+        setGameStatus('done');
+    };
 
     return (
         <div id="mainWrap">
@@ -26,7 +28,7 @@ export default function MainPage() {
             </Row>
             <Row id="gameWrap">
                 <Col xs={8}>
-                    <Board array={boggleArray} />
+                    <Board array={boggleArray} gameStatus={gameStatus}/>
                 </Col>
                 <Col xs={4}>
                     <WordList /*answers={need to get boggleAnswer as a prop for wordlist}*//>
@@ -35,7 +37,9 @@ export default function MainPage() {
             <Row>
                 <Col xs={8}></Col>
                 <Col xs={4}>
-                    // <button onFinish={stopGame} />
+                    <div className="buttonWrap">
+                        <TimerButton startAction={startGame} stopAction={stopGame} gameStatus={gameStatus}/>
+                    </div>
                 </Col>
             </Row>
         </div>
