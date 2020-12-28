@@ -8,15 +8,15 @@ import './mainPage.css';
 
 const boggle = require('pf-boggle');
 
-export default function MainPage() {
-    const boggleArray = boggle.generate(4, boggle.diceSets['classic4']);
-    const allAnswer = boggle.solve(boggleArray);
+export default function MainPage(props) {
+    const allAnswer = boggle.solve(props.boggleArray);
     const boggleAnswer = allAnswer.filter((words) => words.word.length > 2);
 
     const [gameStatus, setGameStatus] = useState("init");
 
     const startGame = () => {
         setGameStatus('started');
+        props.refreshBoard();
     };
 
     const stopGame = () => {
@@ -30,10 +30,10 @@ export default function MainPage() {
             </Row>
             <Row id="gameWrap">
                 <Col xs={8}>
-                    <Board array={boggleArray} gameStatus={gameStatus}/>
+                    <Board array={props.boggleArray} gameStatus={gameStatus}/>
                 </Col>
                 <Col xs={4}>
-                    <WordList array={boggleArray} />
+                    <WordList array={props.boggleArray} />
                 </Col>
             </Row>
             <Row>

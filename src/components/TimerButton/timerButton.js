@@ -4,21 +4,18 @@ import CountdownTimer from "react-component-countdown-timer";
 export default function TimerButton(props) {
 
     const [animationStart, setAnimationStart] = useState(false);
-    const [buttonText, setButtonText] = useState("4");
-    let initialNumber = 4;
+    const [buttonText, setButtonText] = useState("3");
 
     const updateButtonText = () => {
-        if ( buttonText == "1") {
-            console.log("GO!");
+        if (buttonText=='3') {
+            setButtonText('2');
+        } else if (buttonText=='2'){
+            setButtonText('1');
+        } else if (buttonText == "1") {
             setButtonText("Go!");
         } else if ( buttonText == "Go!") {
-            console.log("done")
             setAnimationStart(false);
             props.startAction();
-        } else {
-            initialNumber--;
-            setButtonText(initialNumber.toString());
-            console.log("It should say: ", buttonText);
         }
     }
     useEffect(() => {
@@ -27,18 +24,19 @@ export default function TimerButton(props) {
             return () => clearInterval(startAnimation);
         }
     });
-    console.log("Game Status: ", props.gameStatus);
     if (props.gameStatus=='started') {
         return (
-            <CountdownTimer count={5} border onEnd={props.stopAction}/>
+            <div id="timerButton">
+                <CountdownTimer count={5} border onEnd={props.stopAction}/>
+            </div>
         )
     } else if (!animationStart && props.gameStatus=='init') {
         return (
-            <button id="timerButton" onClick={() => {
+            <div id="timerButton" onClick={() => {
                 setAnimationStart(true);
             }}>
                 Start Game!
-            </button>
+            </div>
         )
     } else if (props.gameStatus=='done') {
         return (

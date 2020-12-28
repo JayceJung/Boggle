@@ -5,7 +5,7 @@ import './board.css';
 export default function Board(props) {
     console.log('Board Array: ', props.array);
   return (
-    <Table responsive id={(props.gameStatus=='init' || props.gameStatus=='done') ? "blurredTable" : "tableWrap"}>
+    <Table responsive id="tableWrap">
       <tbody>
         <tr>
           <td className="table">{props.array[0]}</td>
