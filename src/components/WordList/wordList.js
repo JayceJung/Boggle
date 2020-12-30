@@ -44,6 +44,7 @@ export default function WordList(props) {
             setInputValue(value.toUpperCase());
         }
     };
+    console.log('WordList Array: ', props.array);
 
     return (
         <div className="wordListSection">
