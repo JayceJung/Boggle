@@ -28,7 +28,7 @@ export default function TimerButton(props) {
     if (props.gameStatus=='started') {
         return (
             <div id="timerButton">
-                <CountdownTimer count={5} border size={40} onEnd={props.stopAction}/>
+                <CountdownTimer count={5} backgroundColor={'#37A649'} border size={40} onEnd={props.stopAction}/>
             </div>
         )
     } else if (!animationStart && props.gameStatus=='init') {
