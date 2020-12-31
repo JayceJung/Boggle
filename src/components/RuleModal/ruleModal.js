@@ -1,47 +1,17 @@
-import React, { useState } from 'react';
-import Modal from 'react-modal';
+import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import Button from '@material-ui/core/Button';
-
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        padding: '40px',
-        border: 'solid black 2px'
-    }
-};
+import './ruleModal.css'
 
 export default function RuleModal() {
-    const [modalIsOpen, setIsOpen] = useState(false);
-    function openModal() { 
-        setIsOpen(true);
-    }
-
-    function closeModal() {
-        setIsOpen(false);
-    }
-
     return (
-        <Modal
-            id="modal"
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-        >
-            <Row id="modalTitle" center="lg">
+        <div>
+            <Row center="lg">
                 <Col xs={3}></Col>
-                <Col xs={6}>How to Play</Col>
-                <Col xs={3} id="help">
-                    <Button onClick={closeModal}>close</Button>
-                </Col>
+                <Col xs={6} id="modalTitle">How to Play</Col>
+                <Col xs={3}></Col>
             </Row>
-            <Row>
+            <Row id="rule">
                 - Search the letters for words of 3 or more letters
                 <br />
                 - Words can be formed from letters connecting horizontally,
@@ -53,8 +23,8 @@ export default function RuleModal() {
                 form of, or tense is accepmodaltable
                 <br />- Proper nouns (Toronto, John, Japan) are not allowed
             </Row>
-            <Row>
-                <Table>
+            <Row center="lg">
+                <Table id="pointTable">
                     <tbody>
                         <tr>
                             <td className="modalTable"># of Letters</td>
@@ -79,6 +49,6 @@ export default function RuleModal() {
                     </tbody>
                 </Table>
             </Row>
-        </Modal>
+        </div>
     );
 }

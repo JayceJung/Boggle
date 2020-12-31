@@ -17,26 +17,3 @@
 #help {
     font-size: 30px;
 }
-
-#modal {
-    font-family: 'Nanum Pen Script';
-    font-size: 35px;
-    width: 50%;
-    line-height: 50px;
-}
-
-#modalTitle {
-    font-size: 40px;
-    font-weight: 500;
-    margin-bottom: 30px;
-}
-
-.modalTable {
-    border: solid black 3px;
-    padding: 0.3em;
-    font-weight: 300;
-    font-size: 75px;
-    text-align: center;
-    font-family: 'Nanum Pen Script', sans-serif;
-    width: 25%;
-}
