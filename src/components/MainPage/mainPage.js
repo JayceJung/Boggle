@@ -9,18 +9,7 @@ import Table from 'react-bootstrap/Table';
 import './mainPage.css';
 
 const boggle = require('pf-boggle');
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        padding: '40px',
-        border: 'solid black 2px'
-    }
-};
+
 export default function MainPage() {
     const boggleArray = boggle.generate(4, boggle.diceSets['classic4']);
     const allAnswer = boggle.solve(boggleArray);
