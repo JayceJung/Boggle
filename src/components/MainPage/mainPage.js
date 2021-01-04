@@ -12,7 +12,7 @@ export default function MainPage(props) {
     const allAnswer = boggle.solve(props.boggleArray);
     const boggleAnswer = allAnswer.filter((words) => words.word.length > 2);
 
-    const [gameStatus, setGameStatus] = useState("init");
+    const [gameStatus, setGameStatus] = useState('init');
 
     const startGame = () => {
         setGameStatus('started');
@@ -30,17 +30,24 @@ export default function MainPage(props) {
             </Row>
             <Row id="gameWrap">
                 <Col xs={8}>
-                    <Board array={props.boggleArray} gameStatus={gameStatus}/>
+                    <Board array={props.boggleArray} gameStatus={gameStatus} />
                 </Col>
                 <Col xs={4}>
-                    <WordList array={props.boggleArray} />
+                    <WordList
+                        array={props.boggleArray}
+                        gameStatus={gameStatus}
+                    />
                 </Col>
             </Row>
             <Row>
                 <Col xs={8}></Col>
                 <Col xs={4}>
                     <div className="buttonWrap">
-                        <TimerButton startAction={startGame} stopAction={stopGame} gameStatus={gameStatus}/>
+                        <TimerButton
+                            startAction={startGame}
+                            stopAction={stopGame}
+                            gameStatus={gameStatus}
+                        />
                     </div>
                 </Col>
             </Row>
