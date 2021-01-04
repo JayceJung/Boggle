@@ -36,6 +36,8 @@ export default function MainPage(props) {
                     <WordList
                         array={props.boggleArray}
                         gameStatus={gameStatus}
+                        boggleAnswer={boggleAnswer}
+                        renderInput={true}
                     />
                 </Col>
             </Row>
