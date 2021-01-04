@@ -39,11 +39,11 @@ export default function MainPage(props) {
 
     const openModal = () => {
         setIsOpen(true);
-    }
+    };
 
     const closeModal = () => {
         setIsOpen(false);
-    }
+    };
 
     return (
         <div id="mainWrap">
@@ -70,6 +70,8 @@ export default function MainPage(props) {
                     <WordList
                         array={props.boggleArray}
                         gameStatus={gameStatus}
+                        boggleAnswer={boggleAnswer}
+                        renderInput={true}
                     />
                 </Col>
             </Row>

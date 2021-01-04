@@ -14,6 +14,11 @@ export default function WordList(props) {
         listDiv.scrollTop = listDiv.scrollHeight;
     };
 
+    let listClass = 'list';
+    if (props.gameStatus === 'done' && !listClass.includes('done')) {
+        listClass = listClass + ' done';
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const wordMakeable = wordSearch(inputValue, letters);
@@ -45,11 +50,8 @@ export default function WordList(props) {
         }
     };
 
-    return (
-        <div className="wordListSection">
-            <div className="list" id="list">
-                <WordListItem words={wordsArray} />
-            </div>
+    let renderInput = () => {
+        return (
             <div className="inputDiv">
                 <form onSubmit={handleSubmit}>
                     <input
@@ -63,6 +65,19 @@ export default function WordList(props) {
                     />
                 </form>
             </div>
+        );
+    };
+
+    return (
+        <div className="wordListSection">
+            <div className={listClass} id="list">
+                <WordListItem
+                    words={wordsArray}
+                    gameStatus={props.gameStatus}
+                    boggleAnswer={props.boggleAnswer}
+                />
+            </div>
+            {props.renderInput ? renderInput() : null}
         </div>
     );
 }
