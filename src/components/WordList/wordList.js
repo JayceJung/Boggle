@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import WordListItem from '../WordListItem/wordListItem';
 import './wordList.css';
 import wordSearch from './wordSearch';
+import { connect } from 'react-redux';
 
-export default function WordList(props) {
+const WordList = function (props) {
     const letters = props.array;
     const [inputValue, setInputValue] = useState('');
     const [wordsArray, setWordsArray] = useState([]);
@@ -80,4 +81,9 @@ export default function WordList(props) {
             {props.renderInput ? renderInput() : null}
         </div>
     );
-}
+};
+
+const mapStateToProps = (state) => ({
+    gameStatus: state.gameStatus
+});
+export default connect(mapStateToProps)(WordList);
