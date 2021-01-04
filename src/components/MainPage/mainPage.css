@@ -15,11 +15,5 @@
 }
 
 #help {
-    width: 260px;
-    margin: 40px 0;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0em;
-    text-align: center;
+   font-size: 30px;
 }
