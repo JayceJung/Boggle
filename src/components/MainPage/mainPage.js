@@ -25,13 +25,8 @@ const customStyles = {
 export default function MainPage(props) {
     const allAnswer = boggle.solve(props.boggleArray);
     const boggleAnswer = allAnswer.filter((words) => words.word.length > 2);
-<<<<<<< HEAD
-
-    const [gameStatus, setGameStatus] = useState('init');
-=======
     const [gameStatus, setGameStatus] = useState('init');
     const [modalIsOpen, setIsOpen] = useState(false);
->>>>>>> main
 
     const startGame = () => {
         setGameStatus('started');
@@ -44,11 +39,11 @@ export default function MainPage(props) {
 
     const openModal = () => {
         setIsOpen(true);
-    }
+    };
 
     const closeModal = () => {
         setIsOpen(false);
-    }
+    };
 
     return (
         <div id="mainWrap">
@@ -75,11 +70,8 @@ export default function MainPage(props) {
                     <WordList
                         array={props.boggleArray}
                         gameStatus={gameStatus}
-<<<<<<< HEAD
                         boggleAnswer={boggleAnswer}
                         renderInput={true}
-=======
->>>>>>> main
                     />
                 </Col>
             </Row>
