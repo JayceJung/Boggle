@@ -1,53 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
+import React from 'react';
+import Table from 'react-bootstrap/Table';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import './ruleModal.css'
 
 export default function RuleModal() {
-    var subtitle;
-    const [modalIsOpen, setIsOpen] = useState(false);
-    function openModal() {
-        setIsOpen(true);
-    }
-
-    function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        subtitle.style.color = '#f00';
-    }
-
-    function closeModal() {
-        setIsOpen(false);
-    }
-
     return (
         <div>
-            <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-            >
-                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-                <button onClick={closeModal}>close</button>
-                <div>I am a modal</div>
-                <form>
-                    <input />
-                    <button>tab navigation</button>
-                    <button>stays</button>
-                    <button>inside</button>
-                    <button>the modal</button>
-                </form>
-            </Modal>
+            <Row center="lg">
+                <Col xs={3}></Col>
+                <Col xs={6} id="modalTitle">How to Play</Col>
+                <Col xs={3}></Col>
+            </Row>
+            <Row id="rule">
+                - Search the letters for words of 3 or more letters
+                <br />
+                - Words can be formed from letters connecting horizontally,
+                vertically, or diagonally to the left, right or up-and-down
+                <br />
+                - No letter may be used more than once within a single word
+                <br />
+                - Any word (noun, verb, adjective, adverb, etc.), plural of,
+                form of, or tense is accepmodaltable
+                <br />- Proper nouns (Toronto, John, Japan) are not allowed
+            </Row>
+            <Row center="lg">
+                <Table id="pointTable">
+                    <tbody>
+                        <tr>
+                            <td className="modalTable"># of Letters</td>
+                            <td className="modalTable">3</td>
+                            <td className="modalTable">4</td>
+                            <td className="modalTable">5</td>
+                            <td className="modalTable">6</td>
+                            <td className="modalTable">7</td>
+                            <td className="modalTable">8 or more</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td className="modalTable">Points</td>
+                            <td className="modalTable">1</td>
+                            <td className="modalTable">1</td>
+                            <td className="modalTable">2</td>
+                            <td className="modalTable">3</td>
+                            <td className="modalTable">5</td>
+                            <td className="modalTable">11</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </Row>
         </div>
     );
 }

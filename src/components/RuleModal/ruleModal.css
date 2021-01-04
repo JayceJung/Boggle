@@ -1,0 +1,28 @@
+#modalTitle {
+    font-family: 'Nanum Pen Script';
+    font-size: 75px;
+    margin-bottom: 10px;
+}
+
+#pointTable {
+    margin-top: 10px;
+    border: none;
+    width: 800px;
+}
+
+.modalTable {
+    border: solid black 1px;
+    font-weight: 300;
+    font-size: 40px;
+    padding: 1%;
+    text-align: center;
+    font-family: 'Nanum Pen Script', sans-serif;
+    width: 200px;
+}
+
+#rule {
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 40px;
+    font-family: 'Nanum Pen Script', sans-serif;
+}
