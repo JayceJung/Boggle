@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import WordListItem from '../WordListItem/wordListItem';
 import './wordList.css';
 import wordSearch from './wordSearch';
@@ -7,7 +7,7 @@ export default function WordList(props) {
     const letters = props.array;
     const [inputValue, setInputValue] = useState('');
     const [wordsArray, setWordsArray] = useState([]);
-    const [placeHolder, setPlaceHolder] = useState('Enter words!');
+    const [placeHolder, setPlaceHolder] = useState('');
 
     const scrollToBottom = () => {
         const listDiv = document.getElementById('list');
@@ -20,10 +20,10 @@ export default function WordList(props) {
 
         if (inputValue.length <= 2) {
             setInputValue('');
-            setPlaceHolder('Word is too short!');
+            setPlaceHolder('WORD IS TOO SHORT!');
         } else if (!wordMakeable) {
             setInputValue('');
-            setPlaceHolder("Word can't be made!");
+            setPlaceHolder("WORD CAN'T BE MADE!");
         } else if (
             inputValue != '' &&
             !wordsArray.includes(inputValue) &&
@@ -35,7 +35,7 @@ export default function WordList(props) {
             scrollToBottom();
         } else if (wordsArray.includes(inputValue)) {
             setInputValue('');
-            setPlaceHolder('Word already in list!');
+            setPlaceHolder('WORD ALREADY IN LIST!');
         }
     };
 
@@ -44,7 +44,6 @@ export default function WordList(props) {
             setInputValue(value.toUpperCase());
         }
     };
-    console.log('WordList Array: ', props.array);
 
     return (
         <div className="wordListSection">
@@ -59,6 +58,7 @@ export default function WordList(props) {
                         value={inputValue}
                         onChange={(event) => handleChange(event.target.value)}
                         onSubmit={(event) => handleSubmit(event)}
+                        disabled={props.gameStatus === 'started' ? false : true}
                         placeholder={placeHolder}
                     />
                 </form>
