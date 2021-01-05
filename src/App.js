@@ -1,7 +1,7 @@
 import MainPage from './components/MainPage/mainPage';
 import './App.css';
 import React, { useEffect, useState } from 'react';
-
+import SecondPage from './components/SecondPage/secondPage';
 
 const boggle = require('pf-boggle');
 
@@ -13,7 +13,8 @@ function App() {
     }
     return (
        <div>
-         <MainPage boggleArray={boggleArray} refreshBoard={refreshBoard}/>
+         {/* <MainPage boggleArray={boggleArray} refreshBoard={refreshBoard}/> */}
+         <SecondPage boggleArray={boggleArray}/>
        </div>
       );
     }

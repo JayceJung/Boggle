@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Board from '../Board/board';
 import RuleModal from '../RuleModal/ruleModal';
 import Modal from 'react-modal';
