@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import WordListItem from '../WordListItem/wordListItem';
 import './wordList.css';
 import wordSearch from './wordSearch';
+import { useSelector, useDispatch } from 'react-redux';
+import { addWord } from '../../actions';
 
-export default function WordList(props) {
+const WordList = function (props) {
+    //redux stuff
+    const words = useSelector((state) => state.words);
+    const gameStatus = useSelector((state) => state.gameStatus);
+    const dispatch = useDispatch();
+
     const letters = props.array;
     const [inputValue, setInputValue] = useState('');
-    const [wordsArray, setWordsArray] = useState([]);
     const [placeHolder, setPlaceHolder] = useState('');
 
     const scrollToBottom = () => {
@@ -31,14 +37,14 @@ export default function WordList(props) {
             setPlaceHolder("WORD CAN'T BE MADE!");
         } else if (
             inputValue != '' &&
-            !wordsArray.includes(inputValue) &&
+            !words.includes(inputValue) &&
             wordMakeable
         ) {
-            setWordsArray([...wordsArray, inputValue]);
+            dispatch(addWord(inputValue));
             setInputValue('');
             setPlaceHolder('');
             scrollToBottom();
-        } else if (wordsArray.includes(inputValue)) {
+        } else if (words.includes(inputValue)) {
             setInputValue('');
             setPlaceHolder('WORD ALREADY IN LIST!');
         }
@@ -60,7 +66,7 @@ export default function WordList(props) {
                         value={inputValue}
                         onChange={(event) => handleChange(event.target.value)}
                         onSubmit={(event) => handleSubmit(event)}
-                        disabled={props.gameStatus === 'started' ? false : true}
+                        disabled={gameStatus === 'started' ? false : true}
                         placeholder={placeHolder}
                     />
                 </form>
@@ -71,13 +77,11 @@ export default function WordList(props) {
     return (
         <div className="wordListSection">
             <div className={listClass} id="list">
-                <WordListItem
-                    words={wordsArray}
-                    gameStatus={props.gameStatus}
-                    boggleAnswer={props.boggleAnswer}
-                />
+                <WordListItem boggleAnswer={props.boggleAnswer} />
             </div>
             {props.renderInput ? renderInput() : null}
         </div>
     );
-}
+};
+
+export default WordList;
