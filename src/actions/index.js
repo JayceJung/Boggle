@@ -16,3 +16,15 @@ export const endGame = () => {
         type: 'ENDGAME'
     };
 };
+
+export const initGame = () => {
+    return {
+        type: 'NEWGAME'
+    };
+}
+
+export const pendingGame = () => {
+    return {
+        type: 'PENDING'
+    };
+}

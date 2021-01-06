@@ -77,7 +77,7 @@ const WordList = function (props) {
     return (
         <div className="wordListSection">
             <div className={listClass} id="list">
-                <WordListItem boggleAnswer={props.boggleAnswer} />
+                <WordListItem answers={props.answers}/>
             </div>
             {props.renderInput ? renderInput() : null}
         </div>

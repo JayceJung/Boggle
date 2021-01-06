@@ -1,0 +1,8 @@
+#newGameButton {
+    border: solid black 1px;
+    padding: 1em 3em;
+}
+
+#answerList {
+    margin-right: none;
+}
