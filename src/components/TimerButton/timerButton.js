@@ -1,51 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import CountdownTimer from "react-component-countdown-timer";
-import './timerButton.css'
+import CountdownTimer from 'react-component-countdown-timer';
+import './timerButton.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { startGame, endGame } from '../../actions';
 
 export default function TimerButton(props) {
+    //redux stuff
+    const gameStatus = useSelector((state) => state.gameStatus);
+    const dispatch = useDispatch();
 
     const [animationStart, setAnimationStart] = useState(false);
-    const [buttonText, setButtonText] = useState("3");
+    const [buttonText, setButtonText] = useState('3');
 
     const updateButtonText = () => {
-        if (buttonText=='3') {
+        if (buttonText == '3') {
             setButtonText('2');
-        } else if (buttonText=='2'){
+        } else if (buttonText == '2') {
             setButtonText('1');
-        } else if (buttonText == "1") {
-            setButtonText("Go!");
-        } else if ( buttonText == "Go!") {
+        } else if (buttonText == '1') {
+            setButtonText('Go!');
+        } else if (buttonText == 'Go!') {
             setAnimationStart(false);
-            props.startAction();
+            dispatch(startGame());
+            props.refreshBoard();
         }
-    }
+    };
     useEffect(() => {
-        if(animationStart==true) {
+        if (animationStart == true) {
             let startAnimation = setInterval(updateButtonText, 1000);
             return () => clearInterval(startAnimation);
         }
     });
-    if (props.gameStatus=='started') {
+    if (gameStatus == 'started') {
         return (
             <div id="timerButton">
-                <CountdownTimer count={5} backgroundColor={'#37A649'} border size={40} onEnd={props.stopAction}/>
+                <CountdownTimer
+                    count={5}
+                    backgroundColor={'#37A649'}
+                    border
+                    size={40}
+                    onEnd={() => {
+                        if (gameStatus != 'done') {
+                            dispatch(endGame());
+                        }
+                    }}
+                />
             </div>
-        )
-    } else if (!animationStart && props.gameStatus=='init') {
+        );
+    } else if (!animationStart && gameStatus == 'init') {
         return (
-            <div id="timerButton" onClick={() => {
-                setAnimationStart(true);
-            }}>
+            <div
+                id="timerButton"
+                onClick={() => {
+                    setAnimationStart(true);
+                }}
+            >
                 Start Game!
             </div>
-        )
-    } else if (props.gameStatus=='done') {
-        return (
-            <div id="timerButton">Time's Up!</div>
-        )
+        );
+    } else if (gameStatus == 'done') {
+        return <div id="timerButton">Time's Up!</div>;
     } else {
-        return (
-            <div id="timerButton">{buttonText}</div>
-        )
+        return <div id="timerButton">{buttonText}</div>;
     }
 }
