@@ -26,3 +26,7 @@
     font-size: 1.75rem;
     font-family: 'Nanum Pen Script';
 }
+
+.incorrect {
+    text-decoration: line-through;
+}

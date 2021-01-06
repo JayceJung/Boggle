@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CountdownTimer from 'react-component-countdown-timer';
 import './timerButton.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { startGame, endGame } from '../../actions';
+import { startGame, endGame, initGame, pendingGame } from '../../actions';
 
 export default function TimerButton(props) {
     //redux stuff
@@ -11,6 +11,7 @@ export default function TimerButton(props) {
 
     const [animationStart, setAnimationStart] = useState(false);
     const [buttonText, setButtonText] = useState('3');
+    const [timerStatus, setTimerStatus] = useState(false);
 
     const updateButtonText = () => {
         if (buttonText == '3') {
@@ -35,13 +36,16 @@ export default function TimerButton(props) {
         return (
             <div id="timerButton">
                 <CountdownTimer
-                    count={5}
+                    count={15}
                     backgroundColor={'#37A649'}
                     border
                     size={40}
                     onEnd={() => {
                         if (gameStatus != 'done') {
-                            dispatch(endGame());
+                            dispatch(pendingGame())
+                            setTimeout(() => {
+                                dispatch(endGame())
+                              }, 3000);
                         }
                     }}
                 />
@@ -58,7 +62,7 @@ export default function TimerButton(props) {
                 Start Game!
             </div>
         );
-    } else if (gameStatus == 'done') {
+    } else if (gameStatus === 'pending') {
         return <div id="timerButton">Time's Up!</div>;
     } else {
         return <div id="timerButton">{buttonText}</div>;

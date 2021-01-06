@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import './mainPage.css';
 
-const boggle = require('pf-boggle');
 const customStyles = {
     content: {
         width: '70%',
@@ -23,8 +22,6 @@ const customStyles = {
 };
 
 export default function MainPage(props) {
-    const allAnswer = boggle.solve(props.boggleArray);
-    const boggleAnswer = allAnswer.filter((words) => words.word.length > 2);
     const [modalIsOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
@@ -59,7 +56,6 @@ export default function MainPage(props) {
                 <Col xs={4}>
                     <WordList
                         array={props.boggleArray}
-                        boggleAnswer={boggleAnswer}
                         renderInput={true}
                     />
                 </Col>
