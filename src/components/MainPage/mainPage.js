@@ -25,17 +25,7 @@ const customStyles = {
 export default function MainPage(props) {
     const allAnswer = boggle.solve(props.boggleArray);
     const boggleAnswer = allAnswer.filter((words) => words.word.length > 2);
-    const [gameStatus, setGameStatus] = useState('init');
     const [modalIsOpen, setIsOpen] = useState(false);
-
-    const startGame = () => {
-        setGameStatus('started');
-        props.refreshBoard();
-    };
-
-    const stopGame = () => {
-        setGameStatus('done');
-    };
 
     const openModal = () => {
         setIsOpen(true);
@@ -64,12 +54,11 @@ export default function MainPage(props) {
             </Modal>
             <Row id="gameWrap">
                 <Col xs={8}>
-                    <Board array={props.boggleArray} gameStatus={gameStatus} />
+                    <Board array={props.boggleArray} />
                 </Col>
                 <Col xs={4}>
                     <WordList
                         array={props.boggleArray}
-                        gameStatus={gameStatus}
                         boggleAnswer={boggleAnswer}
                         renderInput={true}
                     />
@@ -79,11 +68,7 @@ export default function MainPage(props) {
                 <Col xs={8}></Col>
                 <Col xs={4}>
                     <div className="buttonWrap">
-                        <TimerButton
-                            startAction={startGame}
-                            stopAction={stopGame}
-                            gameStatus={gameStatus}
-                        />
+                        <TimerButton refreshBoard={props.refreshBoard} />
                     </div>
                 </Col>
             </Row>
