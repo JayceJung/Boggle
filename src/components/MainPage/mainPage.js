@@ -50,7 +50,6 @@ export default function MainPage(props) {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
-                contentLabel="Example Modal"
             >
                 <RuleModal />
             </Modal>
