@@ -3,7 +3,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import Button from '@material-ui/core/Button';
 import WordList from '../WordList/wordList';
 import { useDispatch } from 'react-redux';
-import { initGame } from '../../actions';
+import { initGame, resetWordsList } from '../../actions';
 import './secondPage.css';
 const boggle = require('pf-boggle');
 
@@ -11,6 +11,7 @@ export default function SecondPage(props) {
     const dispatch = useDispatch();
 
     const newGame = () => {
+        dispatch(resetWordsList());
         dispatch(initGame());
     };
 
@@ -30,10 +31,11 @@ export default function SecondPage(props) {
             </Row>
             <Row id="answers" center="lg">
                 <Col xs={5}>
-                    <WordList 
+                    <WordList
                         array={props.boggleArray}
                         answers={boggleAnswer}
-                        renderInput={false}/>
+                        renderInput={false}
+                    />
                 </Col>
             </Row>
             <Row id="answers" center="lg">
