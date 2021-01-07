@@ -1,8 +1,16 @@
 #newGameButton {
-    border: solid black 1px;
-    padding: 1em 3em;
+    font-family: 'Nanum Pen Script';
+    font-size: 30px;
 }
 
-#answerList {
-    margin-right: none;
+#newGame {
+    font-size: 30px;
+}
+
+#viewBoard {
+    margin-top: 20px;
+    font-family: 'Nanum Pen Script';
+    font-size: 30px;
+    border: solid black 2px;
+    padding: 0 1em;
 }

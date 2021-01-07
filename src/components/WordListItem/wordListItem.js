@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 export default function WordListItem(props) {
     const words = useSelector((state) => state.words);
@@ -26,8 +27,14 @@ export default function WordListItem(props) {
 
                 return (
                     <div>
-                        <li key={word}>{word}</li>
-                        <p>{points}</p>
+                        <Row>
+                            <Col xs={6}>
+                                <li className="answerInput" key={word}>{word}</li>                     
+                            </Col>
+                            <Col xs={6}>
+                                <p className="answerPoints">{points}</p>
+                            </Col>
+                        </Row>
                     </div>
                 );
             } else {
@@ -47,10 +54,14 @@ export default function WordListItem(props) {
 
                 return (
                     <div>
-                        <li className="incorrect" key={word}>
-                            {word}
-                        </li>
-                        <p>{points}</p>
+                        <Row >
+                            <Col xs={6}>
+                                <li className="incorrect answerInput" key={word}>{word}</li>                     
+                            </Col>
+                            <Col xs={6}>
+                                <p className="answerPoints">{points}</p>
+                            </Col>
+                        </Row>
                     </div>
                 );
             }

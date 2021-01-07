@@ -40,7 +40,7 @@ export default function SecondPage(props) {
             </Row>
             <Row id="answers" center="lg">
                 <Col xs={4}>
-                    <Button id="ViewBoard">ViewBoard</Button>
+                    <Button id="viewBoard">ViewBoard</Button>
                 </Col>
             </Row>
         </div>

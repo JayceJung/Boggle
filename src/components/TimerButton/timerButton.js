@@ -36,9 +36,11 @@ export default function TimerButton(props) {
         return (
             <div id="timerButton">
                 <CountdownTimer
-                    count={15}
+                    count={3}
                     backgroundColor={'#37A649'}
                     border
+                    hideHours
+                    hideDay
                     size={40}
                     onEnd={() => {
                         if (gameStatus != 'done') {
