@@ -1,15 +1,16 @@
-
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import './ruleModal.css'
+import './ruleModal.css';
 
 export default function RuleModal() {
     return (
         <div>
             <Row center="lg">
                 <Col xs={3}></Col>
-                <Col xs={6} id="modalTitle">How to Play</Col>
+                <Col xs={6} id="modalTitle">
+                    How to Play
+                </Col>
                 <Col xs={3}></Col>
             </Row>
             <Row id="rule">
@@ -23,6 +24,7 @@ export default function RuleModal() {
                 - Any word (noun, verb, adjective, adverb, etc.), plural of,
                 form of, or tense is accepmodaltable
                 <br />- Proper nouns (Toronto, John, Japan) are not allowed
+                <br />- Points are gained/lost based on if a word is/isn't valid
             </Row>
             <Row center="lg">
                 <Table id="pointTable">
@@ -39,7 +41,7 @@ export default function RuleModal() {
                     </tbody>
                     <tbody>
                         <tr>
-                            <td className="modalTable">Points</td>
+                            <td className="modalTable">Points (+/-)</td>
                             <td className="modalTable">1</td>
                             <td className="modalTable">1</td>
                             <td className="modalTable">2</td>
