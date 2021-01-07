@@ -15,7 +15,6 @@ export default function TimerButton(props) {
     const animationStartStatus = useSelector((state) => state.animationStatus);
     const dispatch = useDispatch();
 
-    // const [animationStart, setAnimationStart] = useState(false);
     const [buttonText, setButtonText] = useState('3');
 
     const updateButtonText = () => {
@@ -27,9 +26,10 @@ export default function TimerButton(props) {
             setButtonText('Go!');
         } else if (buttonText == 'Go!') {
             dispatch(animationStatusChange());
-            // setAnimationStart(false);
             dispatch(startGame());
             props.refreshBoard();
+            document.getElementById('inputField').value = '';
+            document.getElementById('inputField').focus();
         }
     };
     useEffect(() => {
@@ -42,7 +42,7 @@ export default function TimerButton(props) {
         return (
             <div id="timerButton">
                 <CountdownTimer
-                    count={10}
+                    count={180}
                     backgroundColor={'#37A649'}
                     border
                     hideHours

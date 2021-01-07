@@ -62,6 +62,7 @@ const WordList = function (props) {
                 <form onSubmit={handleSubmit}>
                     <input
                         className={'inputField'}
+                        id={'inputField'}
                         type="text"
                         value={inputValue}
                         onChange={(event) => handleChange(event.target.value)}
@@ -77,7 +78,7 @@ const WordList = function (props) {
     return (
         <div className="wordListSection">
             <div className={listClass} id="list">
-                <WordListItem answers={props.answers}/>
+                <WordListItem answers={props.answers} />
             </div>
             {props.renderInput ? renderInput() : null}
         </div>
