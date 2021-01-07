@@ -5,6 +5,12 @@ export const addWord = (word) => {
     };
 };
 
+export const resetWordsList = (word) => {
+    return {
+        type: 'RESETWORDSLIST'
+    };
+};
+
 export const startGame = () => {
     return {
         type: 'STARTGAME'
@@ -21,10 +27,10 @@ export const initGame = () => {
     return {
         type: 'NEWGAME'
     };
-}
+};
 
 export const pendingGame = () => {
     return {
         type: 'PENDING'
     };
-}
+};
