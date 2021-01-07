@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import redoLogo from '../../images/redo.png';
 import './mainPage.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { initGame, resetWordsList, animationStatusChange } from '../../actions';
 
 const customStyles = {
     content: {
@@ -23,6 +25,8 @@ const customStyles = {
 };
 
 export default function MainPage(props) {
+    const gameStatus = useSelector((state) => state.gameStatus);
+    const dispatch = useDispatch();
     const [modalIsOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
@@ -34,8 +38,12 @@ export default function MainPage(props) {
     };
 
     const resetBoard = () => {
-        console.log("reset");
-    }
+        if (gameStatus === 'started') {
+            dispatch(animationStatusChange());
+            dispatch(resetWordsList());
+            dispatch(initGame());
+        }
+    };
 
     return (
         <div id="mainWrap">
@@ -43,7 +51,9 @@ export default function MainPage(props) {
                 <Col xs={3}></Col>
                 <Col xs={6}>BOGGLE</Col>
                 <Col xs={3} id="help">
-                    <Button id="howToPlayButton" onClick={openModal}>How to play</Button>
+                    <Button id="howToPlayButton" onClick={openModal}>
+                        How to play
+                    </Button>
                 </Col>
             </Row>
             <Modal
@@ -58,13 +68,9 @@ export default function MainPage(props) {
                     <Board array={props.boggleArray} />
                 </Col>
                 <Col xs={3}>
-                    <WordList
-                        array={props.boggleArray}
-                        renderInput={true}
-                    />
+                    <WordList array={props.boggleArray} renderInput={true} />
                 </Col>
-                <Col xs={1}>
-                </Col>
+                <Col xs={1}></Col>
             </Row>
             <Row>
                 <Col xs={8}></Col>
@@ -74,8 +80,12 @@ export default function MainPage(props) {
                     </div>
                 </Col>
                 <Col xs={1}>
-                    <div className="newGameButtonWrap" onClick={resetBoard}>
-                        <img id="redoLogo" src={redoLogo} alt="redo"/>
+                    <div
+                        className="newGameButtonWrap"
+                        onClick={resetBoard}
+                        disable={gameStatus === 'init' ? true : false}
+                    >
+                        <img id="redoLogo" src={redoLogo} alt="redo" />
                     </div>
                 </Col>
             </Row>

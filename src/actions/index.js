@@ -34,3 +34,9 @@ export const pendingGame = () => {
         type: 'PENDING'
     };
 };
+
+export const animationStatusChange = () => {
+    return {
+        type: 'SWITCHSTATUS'
+    };
+};
