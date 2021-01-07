@@ -54,7 +54,7 @@ export default function SecondPage(props) {
                 </Col>
             </Row>
             <Row id="answers" center="lg">
-                <Col xs={5}>
+                <Col xs={3}>
                     <WordList
                         array={props.boggleArray}
                         answers={boggleAnswer}
