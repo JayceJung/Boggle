@@ -1,3 +1,5 @@
+import { makeid } from './utils';
+
 const app = require("express")();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http, {
@@ -7,14 +9,9 @@ const io = require("socket.io")(http, {
   },
 });
 const boggle = require("pf-boggle");
-
-const gameBoard = boggle.generate(4, boggle.diceSets["classic4"]);
-
-let initalState = {
-  gameStatus: "init",
-  timerStarted: false,
-  gameBoard: gameBoard,
-};
+const state = {};
+const clientRooms = {};
+let initialState;
 
 // io.on('connection', client => {
 //   client.emit('initState', initialState)
@@ -25,18 +22,34 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+  const gameBoard = boggle.generate(4, boggle.diceSets["classic4"]);
+  
+  initialState = {
+    gameStatus: "init",
+    timerStarted: false,
+    gameBoard: gameBoard,
+  };
+
   console.log("New client connected");
 
-  getApiAndEmit(socket);
+  getApiAndEmit(socket, initialState);
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
+  socket.on("newGame", () => {
+    let roomName = makeid(5);
+    clientRooms[socket.id] = roomName;
+    socket.emit('gameCode', roomName);
+
+    socket.join(roomName);
+    socket.number = 1;
+    socket.emit('init', 1);
+  })
 });
 
-const getApiAndEmit = (socket) => {
-  const response = new Date();
+const getApiAndEmit = (socket, initState) => {
   // Emitting a new message. Will be consumed by the client
-  socket.emit("FromAPI", response + " LOL");
+  socket.emit("FromAPI", initState);
 };
 
 http.listen(5000, () => {
