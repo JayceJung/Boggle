@@ -47,12 +47,13 @@ io.on("connection", (socket) => {
     socket.join(roomName);
 
     socket.number = 1;
-    // socket.emit("checkHost", 1);
+    socket.emit("sendHostNumToMain", 1);
   });
 
-  socket.on("reqUserNumber", () => {
-    socket.emit("incomingUserNumber", socket.number);
-  });
+  // socket.on("sendHostNum", (number) => {
+  //   console.log("sendHostNum reached " + number);
+  //   io.sockets.emit("sendHostNumToMain", number);
+  // })
 
   socket.on("joinGame", (gameCode) => {
     socket.number = users.length++;

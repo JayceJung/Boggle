@@ -29,7 +29,6 @@ const ENDPOINT = 'http://localhost:5000';
 
 export default function MainPage(props) {
     const socket = socketIOClient(ENDPOINT, { transport: ['websocket'] });
-
     const [host, setHost] = useState(false);
 
     const gameStatus = useSelector((state) => state.gameStatus);
@@ -44,10 +43,9 @@ export default function MainPage(props) {
         setIsOpen(false);
     };
 
-    socket.emit('reqUserNumber');
-    socket.on('incomingUserNumber', (number) => {
-        console.log(number);
-    });
+    socket.on('sendHostNumToMain', (num) => {
+        console.log('num: ', num);
+    })
 
     const resetBoard = () => {
         if (gameStatus === 'started') {
@@ -56,6 +54,7 @@ export default function MainPage(props) {
             dispatch(initGame());
         }
     };
+    
 
     return (
         <div id="mainWrap">

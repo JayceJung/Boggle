@@ -27,6 +27,12 @@ export default function StartScreen() {
     };
 
     socket.on('gameCode', handleGameCode);
+
+    socket.on('checkHost', (num) =>{
+        console.log("checkHost reached");
+        socket.emit('sendHostNum', num);
+    });
+    
     return (
         <div>
             <button type="submit" id="newGameBtn" onClick={newGame}>
