@@ -42,7 +42,7 @@ export default function TimerButton(props) {
         return (
             <div id="timerButton">
                 <CountdownTimer
-                    count={180}
+                    count={5}
                     backgroundColor={'#37A649'}
                     border
                     hideHours

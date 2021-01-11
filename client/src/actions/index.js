@@ -40,3 +40,10 @@ export const animationStatusChange = () => {
         type: 'SWITCHSTATUS'
     };
 };
+
+export const newGameCode = (gameCode) => {
+    return {
+        type: 'NEWGAMECODE',
+        payload: gameCode
+    };
+};

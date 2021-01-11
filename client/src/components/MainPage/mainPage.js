@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import socketIOClient from 'socket.io-client';
 import Board from '../Board/board';
 import RuleModal from '../RuleModal/ruleModal';
 import Modal from 'react-modal';
@@ -24,7 +25,13 @@ const customStyles = {
     }
 };
 
+const ENDPOINT = 'http://localhost:5000';
+
 export default function MainPage(props) {
+    const socket = socketIOClient(ENDPOINT, { transport: ['websocket'] });
+
+    const [host, setHost] = useState(false);
+
     const gameStatus = useSelector((state) => state.gameStatus);
     const dispatch = useDispatch();
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -36,6 +43,11 @@ export default function MainPage(props) {
     const closeModal = () => {
         setIsOpen(false);
     };
+
+    socket.emit('reqUserNumber');
+    socket.on('incomingUserNumber', (number) => {
+        console.log(number);
+    });
 
     const resetBoard = () => {
         if (gameStatus === 'started') {
@@ -80,13 +92,16 @@ export default function MainPage(props) {
                     </div>
                 </Col>
                 <Col xs={1}>
-                    <div
-                        className="newGameButtonWrap"
-                        onClick={resetBoard}
-                        disable={gameStatus === 'init' ? true : false}
-                    >
-                        <img id="redoLogo" src={redoLogo} alt="redo" />
-                    </div>
+                    {console.log(host)}
+                    {host && (
+                        <div
+                            className="newGameButtonWrap"
+                            onClick={resetBoard}
+                            disable={gameStatus === 'init' ? true : false}
+                        >
+                            <img id="redoLogo" src={redoLogo} alt="redo" />
+                        </div>
+                    )}
                 </Col>
             </Row>
         </div>

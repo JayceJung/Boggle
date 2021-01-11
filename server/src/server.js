@@ -9,13 +9,13 @@ const io = require("socket.io")(http, {
   },
 });
 const boggle = require("pf-boggle");
-const state = {};
-const clientRooms = {};
-let initialState;
 
-// io.on('connection', client => {
-//   client.emit('initState', initialState)
-// });
+const clientRooms = {};
+const gameState = {
+  serverGameStatus: "init",
+};
+
+const users = [];
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello world</h1>");
@@ -23,13 +23,13 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   const gameBoard = boggle.generate(4, boggle.diceSets["classic4"]);
-  
+
   initialState = {
     gameStatus: "newGame",
     timerStarted: false,
     gameBoard: gameBoard,
   };
-  
+
   getApiAndEmit(socket, initialState);
   console.log("New client connected");
 
@@ -42,14 +42,21 @@ io.on("connection", (socket) => {
     console.log("new game generated");
     console.log("room name: " + roomName);
     clientRooms[socket.id] = roomName;
-    socket.emit('gameCode', roomName);
+    socket.emit("gameCode", roomName);
 
     socket.join(roomName);
+
     socket.number = 1;
-    socket.emit('init', 1);
+    // socket.emit("checkHost", 1);
+  });
+
+  socket.on("reqUserNumber", () => {
+    socket.emit("incomingUserNumber", socket.number);
   });
 
   socket.on("joinGame", (gameCode) => {
+    socket.number = users.length++;
+    users.push(socket);
     const room = io.sockets.adapter.rooms[gameCode];
     let allUsers;
     if (room) {
@@ -69,9 +76,7 @@ io.on("connection", (socket) => {
 
     clientRooms[socket.id] = gameCode;
     socket.join(gameCode);
-    clientRooms.emit('init', 2);
-
-
+    clientRooms.emit("init", 2);
   });
 });
 
@@ -81,14 +86,15 @@ const getApiAndEmit = (socket, initState) => {
 };
 
 const makeid = (length) => {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
+};
 
 http.listen(5000, () => {
   console.log("listening on *:5000");
